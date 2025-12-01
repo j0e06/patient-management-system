@@ -1,3 +1,6 @@
+#ifndef PATIENT_H
+#define PATIENT_H
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -30,7 +33,7 @@ public:
     }
 
     // Parameterized constructor
-    Patient(int patientId, string patientName, int patientAge, CaseType patientCaseType) 
+    Patient(int patientId, string patientName, int patientAge, CaseType patientCaseType)
         : id(patientId), name(patientName), age(patientAge), caseType(patientCaseType) {}
 
     // Display patient information
@@ -57,7 +60,7 @@ public:
         default:
             caseTypeStr = "UNKNOWN";
         }
-        
+
         cout << "Patient ID: " << id << endl;
         cout << "Name: " << name << endl;
         cout << "Age: " << age << endl;
@@ -109,3 +112,5 @@ public:
         caseType = newCaseType;
     }
 };
+
+#endif
