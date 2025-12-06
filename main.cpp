@@ -3,6 +3,7 @@
 // Free Palestine
 #include <bits/stdc++.h>
 #include "Patient.h"
+#include "PatientQueue.h"
 using namespace std;
 
 #define int long long

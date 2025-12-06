@@ -4,6 +4,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+#define nl '\n'
+
 // Enum for case types
 enum CaseType
 {
@@ -70,7 +72,7 @@ public:
         cout << "Name: " << name << endl;
         cout << "Age: " << age << endl;
         cout << "Case Type: " << caseTypeStr << endl;
-        cout << "------------------------" << endl;
+        cout << "----------------------------------" << nl;
     }
 
     // Getters
