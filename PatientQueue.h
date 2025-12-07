@@ -178,8 +178,8 @@ public:
         while (!isEmpty())
             dequeue();
     }
-    PatientQueue(const PatientQueue &) = delete;
-    PatientQueue &operator=(const PatientQueue &) = delete;
+    // PatientQueue(const PatientQueue &) = delete;
+    // PatientQueue &operator=(const PatientQueue &) = delete;
 };
 
 #endif

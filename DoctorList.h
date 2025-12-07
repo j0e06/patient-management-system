@@ -32,6 +32,7 @@
 
 
 #include "ListNode.h"
+// #include "PatientQueue.h"
 
 #ifndef DOCTORLIST_H
 #define DOCTORLIST_H
@@ -66,6 +67,22 @@ public:
         DoctorsCount++;
     }
 
+    PatientQueue SearchById( int DoctorId ) // This function returns the queue of the doctor.
+    {
+        ListNode *Start = head ;
+        while ( Start != nullptr )
+        {
+            if ( Start->doctor.getId() == DoctorId )
+            {
+                return Start->Patients ;
+            }
+            Start = Start->next ;
+        }
+        cout << "Doctor Id not found!\n" ;
+        PatientQueue Null ;
+        return Null ;
+    }
+
     bool isEmpty() const
     {
         return head == nullptr;
@@ -87,6 +104,7 @@ public:
         tail = nullptr;
         DoctorsCount = 0;
     }
+
 
 };
 
