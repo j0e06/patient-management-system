@@ -81,7 +81,55 @@ public:
         cout << "Doctor Id not found!\n" ;
         PatientQueue Null ;
         return Null ;
+    }Doctor dequeue()// This function deletes a doctor.
+    {
+        if (isEmpty())
+        {
+            cout << "There is no Doctor " << nl;
+            return Doctor() ;
+        }
+        else
+        {
+            if (head == tail)
+            {
+                Doctor temp=head->doctor;
+                delete head;
+                head = tail = nullptr;
+                DoctorsCount--;
+                return temp ;
+            }
+            else
+            {
+                Doctor temp1 = head->doctor;
+                ListNode *temp = head;
+                head = head->next;
+                delete temp;
+                DoctorsCount--;
+                return temp1;
+            }
+        }
     }
+    void display() // This function display doctors queue
+    {
+        if (isEmpty()) {
+            cout << "There is no Doctor " << nl;
+            return;
+        }
+        else {
+            ListNode *curr = head;
+            while ( curr != nullptr ) {
+                cout <<"Doctor ID"<<curr->doctor.getId()<<endl;
+                cout <<"Doctor Name"<<curr->doctor.getName()<<endl;
+                cout << "==================================" << endl;
+                curr = curr->next;
+
+            }
+        }
+
+    }
+
+
+
 
     bool isEmpty() const
     {
