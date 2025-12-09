@@ -11,7 +11,7 @@
 #include "PatientQueue.h"
 #include "Doctor.h"
 #include "DoctorList.h"
-
+#include "Person.h"
 
 using namespace std;
 
@@ -20,6 +20,9 @@ class HospitalSystem
 private:
     map<CaseType, DoctorList *> doctorsByMajor;
     PatientQueue patientQueue;
+    map<int, Person> validateId; // this to validate id to check if this id is found or not
+    map<int, Doctor> doctors;    // to store all doctors in one place and it map data structure to make it easy to erase and search without looping
+    map<int, Patient> patients;  // to store all doctors in one place and it map data structure to make it easy to erase and search without looping
 
 public:
     HospitalSystem();
@@ -28,20 +31,30 @@ public:
     void run();
 
     // --- Patient Management ---
-    void addPatient();
+    void registerPatient();
     void deletePatient();
-    void showWaitingRoom();
+    void assignPatientToDoctor();
+    void searchPatientByID();
 
     // --- Doctor Management ---
-    void addDoctor();
-    void showDoctors();
+    void hireDoctor();
+    void fireDoctor();
+    void searchDoctorByID();
+    void searchDoctorByDepartment();
+    void showDoctorQueue();
 
     // --- Core Workflow ---
-    void assignPatient();
     void treatPatient();
+    void patientsCount();
+    void doctorsCount();
+    void displayPatients();
+    void displayDoctors();
 
-    // --- Helper ---
+    // Main menu
     void printMainMenu();
+    void patientManagement();
+    void doctorManagement();
+    void printExitScreen();
 };
 
 #endif
