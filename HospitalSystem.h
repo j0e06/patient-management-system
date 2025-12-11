@@ -45,8 +45,8 @@ public:
     void doctorManagement();  // done
     void printExitScreen();   // done
     void treatPatient();      // dequeue patient from each queue
-    void patientsCount();     // we will iterate on majors
-    void doctorsCount();      // we will iterate on majors and LinkedList
+    void patientsCount();     // done // we will iterate on majors
+    void doctorsCount();      // done // we will iterate on majors and LinkedList
     void displayPatients();   // done  // here we will display id , name, Major, Doctor
     void displayDoctors();    // done  // here we will display id , name only
 };

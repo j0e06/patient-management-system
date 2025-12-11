@@ -123,7 +123,7 @@ public:
         return head == nullptr;
     }
 
-    int count() const
+    int getCount() const
     {
         return DoctorsCount;
     }

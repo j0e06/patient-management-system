@@ -332,6 +332,36 @@ void HospitalSystem::patientsCount()
     cout << "+==================================================+\n";
 }
 
+void HospitalSystem::doctorsCount()
+{
+    int general = 0, emergency = 0, icu = 0, pediatric = 0, surgical = 0;
+
+    if (doctorsByMajor.count(GENERAL))
+        general = doctorsByMajor[GENERAL]->getCount();
+    if (doctorsByMajor.count(EMERGENCY))
+        emergency = doctorsByMajor[EMERGENCY]->getCount();
+    if (doctorsByMajor.count(ICU))
+        icu = doctorsByMajor[ICU]->getCount();
+    if (doctorsByMajor.count(PEDIATRIC))
+        pediatric = doctorsByMajor[PEDIATRIC]->getCount();
+    if (doctorsByMajor.count(SURGICAL))
+        surgical = doctorsByMajor[SURGICAL]->getCount();
+
+    int total = general + emergency + icu + pediatric + surgical;
+
+    cout << "\n+==================================================+\n";
+    cout << "|                 DOCTORS COUNT SUMMARY            |\n";
+    cout << "+==================================================+\n";
+    cout << "GENERAL Doctors    : " << general << "\n";
+    cout << "EMERGENCY Doctors  : " << emergency << "\n";
+    cout << "ICU Doctors        : " << icu << "\n";
+    cout << "PEDIATRIC Doctors  : " << pediatric << "\n";
+    cout << "SURGICAL Doctors   : " << surgical << "\n";
+    cout << "----------------------------------------------------\n";
+    cout << "Total Doctors      : " << total << "\n";
+    cout << "+==================================================+\n";
+}
+
 // ================= MAIN MENU & PATIENT MENU & DOCTOR MENU & closing =================
 
 void HospitalSystem::printMainMenu() // welcome menu
