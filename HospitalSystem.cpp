@@ -178,36 +178,61 @@ void HospitalSystem::searchPatientByID()
     cout << "Enter Patient ID to search: ";
     int id = safe_input_int(1, INT_MAX);
 
-    // Check if patient exists in the system
-    if (validateId.count(id) == 0)
+    bool found = false;
+
+    // 1. Search in the General Waiting List (No doctor assigned yet)
+    QueueNode *currP = waiting.getHead();
+    while (currP != nullptr)
     {
-        cout << "\nPatient with ID " << id << " not found in the system.\n";
-        cout << "+==================================================+\n";
-        return;
+        if (currP->patient.getId() == id)
+        {
+            cout << "\n+==================================================+\n";
+            cout << "|               PATIENT INFORMATION                 |\n";
+            cout << "+==================================================+\n";
+            currP->patient.display();
+            cout << "Status        : In Waiting List (Not assigned to a doctor)\n";
+            cout << "+==================================================+\n";
+            return;
+        }
+        currP = currP->next;
     }
 
-    // Get person from validateId map
-    Person person = validateId[id];
-    // Verify this ID belongs to a patient (search in patient queues)
-    // Since we have the CaseType, we can check if it's a doctor in that department.
-    // If it is a doctor, we shouldn't display it as a patient.
-    if (doctorsByMajor[person.getCaseType()]->SearchById(id) != nullptr)
+    // 2. Search in every Doctor's Patient Queue
+    // We iterate through every major -> every doctor -> their patient queue
+    for (auto &[major, docList] : doctorsByMajor)
     {
-        cout << "This ID belongs to a doctor, not a patient!\n";
-        cout << "+==================================================+\n";
-        return;
+        ListNode *currDoc = docList->getHead();
+        while (currDoc != nullptr)
+        {
+            // Search inside this doctor's specific queue
+            QueueNode *pNode = currDoc->Patients.getHead();
+            while (pNode != nullptr)
+            {
+                if (pNode->patient.getId() == id)
+                {
+                    cout << "\n+==================================================+\n";
+                    cout << "|               PATIENT INFORMATION                 |\n";
+                    cout << "+==================================================+\n";
+                    pNode->patient.display();
+                    cout << "Status        : Assigned to Dr. " << currDoc->doctor.getName() << "\n";
+                    cout << "Doctor ID     : " << currDoc->doctor.getId() << "\n";
+                    cout << "+==================================================+\n";
+                    return;
+                }
+                pNode = pNode->next;
+            }
+            currDoc = currDoc->next;
+        }
     }
 
-    // Display patient information
-    cout << "\n+==================================================+\n";
-    cout << "|               PATIENT INFORMATION                 |\n";
+    // 3. If the loop finishes and we haven't returned, the patient was not found
+    cout << "\nPatient with ID " << id << " not found in any patient queue.\n";
+    // Check if it exists in the system map (meaning it might be a doctor)
+    if (validateId.count(id))
+    {
+        cout << "(Note: This ID is registered in the system, but it likely belongs to a Doctor.)\n";
+    }
     cout << "+==================================================+\n";
-    cout << "Patient ID    : " << id << "\n";
-    cout << "Name          : " << person.getName() << "\n";
-    cout << "Age           : " << person.getAge() << "\n";
-    cout << "Case Type     : " << caseTypeTostring(person.getCaseType()) << "\n";
-
-    cout << "\n+==================================================+\n";
 }
 
 // ================= DOCTOR MANAGEMENT =================
