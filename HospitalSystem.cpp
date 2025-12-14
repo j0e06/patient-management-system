@@ -116,7 +116,7 @@ void HospitalSystem::registerPatient()
     string name = readLineTrimmed();
 
     cout << "Enter Age: ";
-    int age = safe_input_int(0, 150);
+    int age = safe_input_int(1, 150);
 
     CaseType ct = readCaseType();
 
@@ -126,7 +126,7 @@ void HospitalSystem::registerPatient()
 
     if (list == nullptr || list->isEmpty())
     {
-        cout << "No doctors availalbe  in the department!" << nl;
+        // cout << "No doctors availalbe  in the department!" << nl;
         cout << "Patient will be pushed into the WAITING LIST.\n";
         waiting.enqueue(p);
         cout << name << " added to WATTING LIST." << nl;
